@@ -5,8 +5,7 @@ from length_conversion import LengthConversion
 pygame.init()
 
 HEX_GREY = "#2C3333"
-HEZ_DARK_BLUE = "#395B64"
-HEX_LIGHT_BLUE = "#A5C9CA"
+HEX_BLUE = "#A5C9CA"
 HEX_WHITE = "#E7F6F2"
 
 WIDTH = 860
@@ -28,7 +27,7 @@ def main_menu():
 
         Y_SPACING = HEIGHT * 0.1
 
-        TEXT = get_font(HEIGHT * 0.1).render("Menu", True, HEX_LIGHT_BLUE)
+        TEXT = get_font(HEIGHT * 0.1).render("Menu", True, HEX_BLUE)
         RECT = TEXT.get_rect(center=(WIDTH * 0.5, Y_SPACING))
         SCREEN.blit(TEXT, RECT)
 
@@ -38,7 +37,7 @@ def main_menu():
             text_input="Conversions",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         FITNESS_BUTTON = Button(
@@ -47,7 +46,7 @@ def main_menu():
             text_input="Fitness",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         MATH_BUTTON = Button(
@@ -56,7 +55,7 @@ def main_menu():
             text_input="Math",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         GENERATORS_BUTTON = Button(
@@ -65,7 +64,7 @@ def main_menu():
             text_input="Generators",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         TIME_BUTTON = Button(
@@ -74,7 +73,7 @@ def main_menu():
             text_input="Time",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         BACK_BUTTON = Button(
@@ -83,7 +82,7 @@ def main_menu():
             text_input="Back",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         EXIT_BUTTON = Button(
@@ -92,7 +91,7 @@ def main_menu():
             text_input="Exit",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         for button in [
@@ -137,7 +136,7 @@ def conversions_menu():
 
         Y_SPACING = HEIGHT * 0.1
 
-        TEXT = get_font(HEIGHT * 0.1).render("Conversions", True, HEX_LIGHT_BLUE)
+        TEXT = get_font(HEIGHT * 0.1).render("Conversions", True, HEX_BLUE)
         RECT = TEXT.get_rect(center=(WIDTH * 0.5, Y_SPACING))
         SCREEN.blit(TEXT, RECT)
 
@@ -147,7 +146,7 @@ def conversions_menu():
             text_input="Area",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         LENGTH_BUTTON = Button(
@@ -156,7 +155,7 @@ def conversions_menu():
             text_input="Length",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         TEMPERATURE_BUTTON = Button(
@@ -165,7 +164,7 @@ def conversions_menu():
             text_input="Temperature",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         VOLUME_BUTTON = Button(
@@ -174,7 +173,7 @@ def conversions_menu():
             text_input="Volume",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         WEIGHT_BUTTON = Button(
@@ -183,7 +182,7 @@ def conversions_menu():
             text_input="Weight",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         BACK_BUTTON = Button(
@@ -192,7 +191,7 @@ def conversions_menu():
             text_input="Back",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         EXIT_BUTTON = Button(
@@ -201,7 +200,7 @@ def conversions_menu():
             text_input="Exit",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         for button in [
@@ -256,45 +255,45 @@ def conversions_length_menu():
 
         SCREEN.fill(HEX_GREY)
 
-        X_SPACING = WIDTH * 0.125
+        X_SPACING = WIDTH * 0.25
         Y_SPACING = HEIGHT * 0.1
 
         # Length
-        text = get_font(HEIGHT * 0.1).render("Length", True, HEX_LIGHT_BLUE)
+        text = get_font(HEIGHT * 0.1).render("Length", True, HEX_BLUE)
         rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING))
         SCREEN.blit(text, rect)
 
         # amt1
         text = get_font(HEIGHT * 0.04).render(amt1, True, HEX_WHITE)
-        rect = text.get_rect(center=(X_SPACING, Y_SPACING * 3))
+        rect = text.get_rect(center=(WIDTH // 2 - X_SPACING, Y_SPACING * 3))
         SCREEN.blit(text, rect)
 
         # =
         text = get_font(HEIGHT * 0.04).render("=", True, HEX_WHITE)
-        rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING * 3))
+        rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING * 4))
         SCREEN.blit(text, rect)
 
         # amt2
         text = get_font(HEIGHT * 0.04).render(amt2, True, HEX_WHITE)
-        rect = text.get_rect(center=(WIDTH // 2 + X_SPACING, Y_SPACING * 3))
+        rect = text.get_rect(center=(WIDTH // 2 - X_SPACING, Y_SPACING * 5))
         SCREEN.blit(text, rect)
 
         UNIT1_BUTTON = Button(
             image=None,
-            pos=(WIDTH // 2 - X_SPACING, Y_SPACING * 3),
+            pos=(WIDTH - X_SPACING, Y_SPACING * 3),
             text_input=unit1,
             font=get_font(HEIGHT * 0.04),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         UNIT2_BUTTON = Button(
             image=None,
-            pos=(WIDTH - X_SPACING, Y_SPACING * 3),
+            pos=(WIDTH - X_SPACING, Y_SPACING * 5),
             text_input=unit2,
             font=get_font(HEIGHT * 0.04),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         BACK_BUTTON = Button(
@@ -303,7 +302,7 @@ def conversions_length_menu():
             text_input="Back",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         EXIT_BUTTON = Button(
@@ -312,7 +311,7 @@ def conversions_length_menu():
             text_input="Exit",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
 
         for button in [
@@ -351,6 +350,8 @@ def conversions_length_menu():
                     amt1 += "9"
                 elif event.key == pygame.K_PERIOD or event.key == pygame.K_COMMA:
                     amt1 += "."
+                elif event.key == pygame.K_PLUS and (len(amt1) == 0 or amt1[-1] == "e"):
+                    amt1 += "+"
                 elif event.key == pygame.K_MINUS and (
                     len(amt1) == 0 or amt1[-1] == "e"
                 ):
@@ -367,7 +368,7 @@ def conversions_length_menu():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if UNIT1_BUTTON.checkForInput(MOUSE_POS):
-                    unit1 = conversions_length_menu_unit_selection(unit1, 1)
+                    unit1 = conversions_length_menu_unit_selection(unit1, 0)
                 if UNIT2_BUTTON.checkForInput(MOUSE_POS):
                     unit2 = conversions_length_menu_unit_selection(unit2, 2)
                 if BACK_BUTTON.checkForInput(MOUSE_POS):
@@ -382,122 +383,135 @@ def conversions_length_menu():
         pygame.display.update()
 
 
-def conversions_length_menu_unit_selection(curr_unit, unit_number):
+def conversions_length_menu_unit_selection(curr_unit, flag):
     while True:
         MOUSE_POS = pygame.mouse.get_pos()
 
         SCREEN.fill(HEX_GREY)
 
-        X_SPACING = WIDTH * 0.125
+        X_SPACING = WIDTH * 0.25
         Y_SPACING = HEIGHT * 0.1
+        y_increment = 3.5
 
         METER = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 3.5),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="meter(m)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         KILOMETER = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 4),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="kilometer(km)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         DECIMETER = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 4.5),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="decimeter(dm)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         CENTIMETER = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 5),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="centimeter(cm)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         MILIMETER = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 5.5),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="milimeter(mm)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         MICROMETER = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 6),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="micrometer(μm)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         NANOMETER = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 6.5),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="nanometer(nm)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         MILE = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 7),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="mile(mi)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         YARD = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 7.5),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="yard(yd)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         FOOT = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 8),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="foot(ft)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         INCH = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 8.5),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="inch(in)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         LIGH_YEAR = Button(
             image=None,
-            pos=(WIDTH // (3 - unit_number) - X_SPACING, Y_SPACING * 9),
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
             text_input="light year(ly)",
-            font=get_font(HEIGHT * 0.03),
+            font=get_font(HEIGHT * 0.025),
             base_color=HEX_WHITE,
-            hovering_color=HEX_LIGHT_BLUE,
+            hovering_color=HEX_BLUE,
         )
+        y_increment += 0.35
 
         for button in [
             METER,
@@ -581,5 +595,4 @@ def time_menu():
     pass
 
 
-conversions_length_menu()
 main_menu()
