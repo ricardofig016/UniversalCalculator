@@ -88,7 +88,7 @@ class AreaConversion(object):
             return self.amt1
         elif self.unit2 == "inch(in)":
             return self.amt1
-        elif self.unit2 == "ligh year(ly)":
+        elif self.unit2 == "ligh year(ly)":  # mistake here
             return self.amt1
 
     def convert_decimeter(self):
