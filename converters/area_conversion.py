@@ -10,7 +10,7 @@ class AreaConversion(object):
 
     def convert(self):
         if self.amt1 == "invalid_amt1":
-            return "invalid_amt1"
+            return self.amt1
 
         if self.unit1 == "square meter(m²)":
             return self.convert_meter()

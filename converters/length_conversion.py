@@ -10,7 +10,7 @@ class LengthConversion(object):
 
     def convert(self):
         if self.amt1 == "invalid_amt1":
-            return "invalid_amt1"
+            return self.amt1
 
         if self.unit1 == "meter(m)":
             return self.convert_meter()
