@@ -1,6 +1,3 @@
-# completed
-
-
 class LengthConversion(object):
     def __init__(self, amt1_str, unit1, unit2) -> None:
         try:
