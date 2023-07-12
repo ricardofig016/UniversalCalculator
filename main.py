@@ -1,3 +1,5 @@
+# formulas and structure heavily based on https://www.unitconverters.net/
+
 import pygame, sys
 from button import Button
 from converters.area_conversion import AreaConversion
