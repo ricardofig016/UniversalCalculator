@@ -1,6 +1,6 @@
 import pygame, sys
 from button import Button
-from area_conversion import AreaConversion
+from length_conversion import LengthConversion
 
 pygame.init()
 
@@ -241,10 +241,14 @@ def conversions_menu():
 
 
 def conversions_area_menu():
+    pass
+
+
+def conversions_length_menu():
     unit1 = "kilometer(km)"
     unit2 = "meter(m)"
     amt1 = "1"
-    c = AreaConversion(amt1, unit1, unit2)
+    c = LengthConversion(amt1, unit1, unit2)
     amt2 = str(c.convert())
 
     while True:
@@ -255,8 +259,8 @@ def conversions_area_menu():
         X_SPACING = WIDTH * 0.125
         Y_SPACING = HEIGHT * 0.1
 
-        # Area
-        text = get_font(HEIGHT * 0.1).render("Area", True, HEX_LIGHT_BLUE)
+        # Length
+        text = get_font(HEIGHT * 0.1).render("Length", True, HEX_LIGHT_BLUE)
         rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING))
         SCREEN.blit(text, rect)
 
@@ -358,27 +362,27 @@ def conversions_area_menu():
                 elif event.key == pygame.K_BACKSPACE:
                     amt1 = amt1[:-1]
 
-                c = AreaConversion(amt1, unit1, unit2)
+                c = LengthConversion(amt1, unit1, unit2)
                 amt2 = str(c.convert())
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if UNIT1_BUTTON.checkForInput(MOUSE_POS):
-                    unit1 = conversions_area_menu_unit_selection(unit1, 1)
+                    unit1 = conversions_length_menu_unit_selection(unit1, 1)
                 if UNIT2_BUTTON.checkForInput(MOUSE_POS):
-                    unit2 = conversions_area_menu_unit_selection(unit2, 2)
+                    unit2 = conversions_length_menu_unit_selection(unit2, 2)
                 if BACK_BUTTON.checkForInput(MOUSE_POS):
                     conversions_menu()
                 if EXIT_BUTTON.checkForInput(MOUSE_POS):
                     pygame.quit()
                     sys.exit()
 
-                c = AreaConversion(amt1, unit1, unit2)
+                c = LengthConversion(amt1, unit1, unit2)
                 amt2 = str(c.convert())
 
         pygame.display.update()
 
 
-def conversions_area_menu_unit_selection(curr_unit, unit_number):
+def conversions_length_menu_unit_selection(curr_unit, unit_number):
     while True:
         MOUSE_POS = pygame.mouse.get_pos()
 
@@ -549,10 +553,6 @@ def conversions_area_menu_unit_selection(curr_unit, unit_number):
         pygame.display.update()
 
 
-def conversions_length_menu():
-    pass
-
-
 def conversions_temperature_menu():
     pass
 
@@ -581,5 +581,5 @@ def time_menu():
     pass
 
 
-conversions_area_menu()
+conversions_length_menu()
 main_menu()
