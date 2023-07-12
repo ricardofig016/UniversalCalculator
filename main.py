@@ -1,7 +1,8 @@
 import pygame, sys
 from button import Button
-from area_conversion import AreaConversion
-from length_conversion import LengthConversion
+from converters.area_conversion import AreaConversion
+from converters.length_conversion import LengthConversion
+from converters.temperature_conversion import TemperatureConversion
 
 pygame.init()
 
@@ -135,7 +136,8 @@ def conversions_menu():
 
         SCREEN.fill(HEX_GREY)
 
-        Y_SPACING = HEIGHT * 0.1
+        Y_SPACING = HEIGHT * 0.09
+        button_counter = 3
 
         text = get_font(HEIGHT * 0.1).render("Conversions", True, HEX_BLUE)
         rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING))
@@ -143,48 +145,63 @@ def conversions_menu():
 
         AREA_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * 3),
+            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
             text_input="Area",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
+        button_counter += 1
+
+        CURRENCY_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
+            text_input="Currency",
+            font=get_font(HEIGHT * 0.05),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        button_counter += 1
 
         LENGTH_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * 4),
+            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
             text_input="Length",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
+        button_counter += 1
 
         TEMPERATURE_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * 5),
+            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
             text_input="Temperature",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
+        button_counter += 1
 
         VOLUME_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * 6),
+            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
             text_input="Volume",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
+        button_counter += 1
 
         WEIGHT_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * 7),
+            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
             text_input="Weight",
             font=get_font(HEIGHT * 0.05),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
+        button_counter += 1
 
         BACK_BUTTON = Button(
             image=None,
@@ -206,6 +223,7 @@ def conversions_menu():
 
         for button in [
             AREA_BUTTON,
+            CURRENCY_BUTTON,
             LENGTH_BUTTON,
             TEMPERATURE_BUTTON,
             VOLUME_BUTTON,
@@ -223,6 +241,8 @@ def conversions_menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if AREA_BUTTON.checkForInput(MOUSE_POS):
                     conversions_area_menu()
+                if CURRENCY_BUTTON.checkForInput(MOUSE_POS):
+                    conversions_currency_menu()
                 if LENGTH_BUTTON.checkForInput(MOUSE_POS):
                     conversions_length_menu()
                 if TEMPERATURE_BUTTON.checkForInput(MOUSE_POS):
@@ -353,7 +373,7 @@ def conversions_area_menu():
                     len(amt1) == 0 or amt1[-1] == "e"
                 ):
                     amt1 += "-"
-                elif event.key == pygame.K_e and len(amt1) != 0:
+                elif event.key == pygame.K_e and len(amt1) != 0 and not "e" in amt1:
                     amt1 += "e"
                 elif event.key == pygame.K_ESCAPE:
                     amt1 = ""
@@ -551,6 +571,14 @@ def conversions_area_menu_unit_selection(curr_unit, flag):
         pygame.display.update()
 
 
+def conversions_currency_menu():
+    pass
+
+
+def conversion_currency_unit_selection(curr_unit, flag):
+    pass
+
+
 def conversions_length_menu():
     unit1 = "kilometer(km)"
     unit2 = "meter(m)"
@@ -664,7 +692,7 @@ def conversions_length_menu():
                     len(amt1) == 0 or amt1[-1] == "e"
                 ):
                     amt1 += "-"
-                elif event.key == pygame.K_e and len(amt1) != 0:
+                elif event.key == pygame.K_e and len(amt1) != 0 and not "e" in amt1:
                     amt1 += "e"
                 elif event.key == pygame.K_ESCAPE:
                     amt1 = ""
@@ -876,7 +904,218 @@ def conversions_length_menu_unit_selection(curr_unit, flag):
 
 
 def conversions_temperature_menu():
-    pass
+    unit1 = "Fahrenheit(°F)"
+    unit2 = "Celsius(°C)"
+    amt1 = "70"
+    c = TemperatureConversion(amt1, unit1, unit2)
+    amt2 = str(c.convert())
+
+    while True:
+        MOUSE_POS = pygame.mouse.get_pos()
+
+        SCREEN.fill(HEX_GREY)
+
+        X_SPACING = WIDTH * 0.25
+        Y_SPACING = HEIGHT * 0.1
+
+        # Temperature
+        text = get_font(HEIGHT * 0.1).render("Temperature", True, HEX_BLUE)
+        rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING))
+        SCREEN.blit(text, rect)
+
+        # amt1
+        text = get_font(HEIGHT * 0.04).render(amt1, True, HEX_WHITE)
+        rect = text.get_rect(center=(WIDTH // 2 - X_SPACING, Y_SPACING * 3))
+        SCREEN.blit(text, rect)
+
+        # =
+        text = get_font(HEIGHT * 0.04).render("=", True, HEX_WHITE)
+        rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING * 4))
+        SCREEN.blit(text, rect)
+
+        # amt2
+        text = get_font(HEIGHT * 0.04).render(amt2, True, HEX_WHITE)
+        rect = text.get_rect(center=(WIDTH // 2 - X_SPACING, Y_SPACING * 5))
+        SCREEN.blit(text, rect)
+
+        UNIT1_BUTTON = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * 3),
+            text_input=unit1,
+            font=get_font(HEIGHT * 0.04),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        UNIT2_BUTTON = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * 5),
+            text_input=unit2,
+            font=get_font(HEIGHT * 0.04),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        BACK_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.4, HEIGHT - Y_SPACING),
+            text_input="Back",
+            font=get_font(HEIGHT * 0.05),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        EXIT_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.6, HEIGHT - Y_SPACING),
+            text_input="Exit",
+            font=get_font(HEIGHT * 0.05),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        for button in [
+            UNIT1_BUTTON,
+            UNIT2_BUTTON,
+            BACK_BUTTON,
+            EXIT_BUTTON,
+        ]:
+            button.changeColor(MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_0:
+                    amt1 += "0"
+                elif event.key == pygame.K_1:
+                    amt1 += "1"
+                elif event.key == pygame.K_2:
+                    amt1 += "2"
+                elif event.key == pygame.K_3:
+                    amt1 += "3"
+                elif event.key == pygame.K_4:
+                    amt1 += "4"
+                elif event.key == pygame.K_5:
+                    amt1 += "5"
+                elif event.key == pygame.K_6:
+                    amt1 += "6"
+                elif event.key == pygame.K_7:
+                    amt1 += "7"
+                elif event.key == pygame.K_8:
+                    amt1 += "8"
+                elif event.key == pygame.K_9:
+                    amt1 += "9"
+                elif event.key == pygame.K_PERIOD or event.key == pygame.K_COMMA:
+                    amt1 += "."
+                elif event.key == pygame.K_PLUS and (len(amt1) == 0 or amt1[-1] == "e"):
+                    amt1 += "+"
+                elif event.key == pygame.K_MINUS and (
+                    len(amt1) == 0 or amt1[-1] == "e"
+                ):
+                    amt1 += "-"
+                elif event.key == pygame.K_e and len(amt1) != 0 and not "e" in amt1:
+                    amt1 += "e"
+                elif event.key == pygame.K_ESCAPE:
+                    amt1 = ""
+                elif event.key == pygame.K_BACKSPACE:
+                    amt1 = amt1[:-1]
+
+                c = TemperatureConversion(amt1, unit1, unit2)
+                amt2 = str(c.convert())
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if UNIT1_BUTTON.checkForInput(MOUSE_POS):
+                    unit1 = conversions_temperature_menu_unit_selection(unit1, 0)
+                if UNIT2_BUTTON.checkForInput(MOUSE_POS):
+                    unit2 = conversions_temperature_menu_unit_selection(unit2, 2)
+                if BACK_BUTTON.checkForInput(MOUSE_POS):
+                    conversions_menu()
+                if EXIT_BUTTON.checkForInput(MOUSE_POS):
+                    pygame.quit()
+                    sys.exit()
+
+                c = TemperatureConversion(amt1, unit1, unit2)
+                amt2 = str(c.convert())
+
+        pygame.display.update()
+
+
+def conversions_temperature_menu_unit_selection(curr_unit, flag):
+    while True:
+        MOUSE_POS = pygame.mouse.get_pos()
+
+        SCREEN.fill(HEX_GREY)
+
+        X_SPACING = WIDTH * 0.25
+        Y_SPACING = HEIGHT * 0.1
+        y_increment = 3.5
+
+        CELSIUS = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="Celsius(°C)",
+            font=get_font(HEIGHT * 0.03),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.4
+
+        FAHRENHEIT = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="Fahrenheit(°F)",
+            font=get_font(HEIGHT * 0.03),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.4
+
+        KELVIN = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="Kelvin(K)",
+            font=get_font(HEIGHT * 0.03),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.4
+
+        RANKINE = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="Rankine(°R)",
+            font=get_font(HEIGHT * 0.03),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.4
+
+        for button in [CELSIUS, FAHRENHEIT, KELVIN, RANKINE]:
+            button.changeColor(MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return curr_unit
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if CELSIUS.checkForInput(MOUSE_POS):
+                    return "Celsius(°C)"
+                if FAHRENHEIT.checkForInput(MOUSE_POS):
+                    return "Fahrenheit(°F)"
+                if KELVIN.checkForInput(MOUSE_POS):
+                    return "Kelvin(K)"
+                if RANKINE.checkForInput(MOUSE_POS):
+                    return "Rankine(°R)"
+
+        pygame.display.update()
 
 
 def conversions_volume_menu():
