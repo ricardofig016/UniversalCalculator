@@ -2,6 +2,7 @@
 
 import pygame, sys
 from button import Button
+from converters.angle_conversion import AngleConversion
 from converters.area_conversion import AreaConversion
 from converters.currency_conversion import CurrencyConversion
 from converters.length_conversion import LengthConversion
@@ -139,18 +140,29 @@ def conversions_menu():
 
         SCREEN.fill(HEX_GREY)
 
-        Y_SPACING = HEIGHT * 0.09
+        Y_SPACING = HEIGHT * 0.085
+        button_size_multiplier = 0.05
         button_counter = 3
 
         text = get_font(HEIGHT * 0.1).render("Conversions", True, HEX_BLUE)
         rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING))
         SCREEN.blit(text, rect)
 
+        ANGLE_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
+            text_input="Angle",
+            font=get_font(HEIGHT * button_size_multiplier),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        button_counter += 1
+
         AREA_BUTTON = Button(
             image=None,
             pos=(WIDTH * 0.5, Y_SPACING * button_counter),
             text_input="Area",
-            font=get_font(HEIGHT * 0.05),
+            font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
@@ -160,7 +172,7 @@ def conversions_menu():
             image=None,
             pos=(WIDTH * 0.5, Y_SPACING * button_counter),
             text_input="Currency",
-            font=get_font(HEIGHT * 0.05),
+            font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
@@ -170,7 +182,7 @@ def conversions_menu():
             image=None,
             pos=(WIDTH * 0.5, Y_SPACING * button_counter),
             text_input="Length",
-            font=get_font(HEIGHT * 0.05),
+            font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
@@ -180,7 +192,7 @@ def conversions_menu():
             image=None,
             pos=(WIDTH * 0.5, Y_SPACING * button_counter),
             text_input="Temperature",
-            font=get_font(HEIGHT * 0.05),
+            font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
@@ -190,7 +202,7 @@ def conversions_menu():
             image=None,
             pos=(WIDTH * 0.5, Y_SPACING * button_counter),
             text_input="Volume",
-            font=get_font(HEIGHT * 0.05),
+            font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
@@ -200,7 +212,7 @@ def conversions_menu():
             image=None,
             pos=(WIDTH * 0.5, Y_SPACING * button_counter),
             text_input="Weight",
-            font=get_font(HEIGHT * 0.05),
+            font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
@@ -225,6 +237,7 @@ def conversions_menu():
         )
 
         for button in [
+            ANGLE_BUTTON,
             AREA_BUTTON,
             CURRENCY_BUTTON,
             LENGTH_BUTTON,
@@ -242,6 +255,8 @@ def conversions_menu():
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
+                if ANGLE_BUTTON.checkForInput(MOUSE_POS):
+                    conversions_angle_menu()
                 if AREA_BUTTON.checkForInput(MOUSE_POS):
                     conversions_area_menu()
                 if CURRENCY_BUTTON.checkForInput(MOUSE_POS):
@@ -259,6 +274,246 @@ def conversions_menu():
                 if EXIT_BUTTON.checkForInput(MOUSE_POS):
                     pygame.quit()
                     sys.exit()
+
+        pygame.display.update()
+
+
+def conversions_angle_menu():
+    unit1 = "degree(º)"
+    unit2 = "radian(π)"
+    amt1 = "360"
+    c = AngleConversion(amt1, unit1, unit2)
+    try:
+        amt2 = str(round(c.convert(), 2))
+    except TypeError:
+        amt2 = str(c.convert())
+
+    while True:
+        MOUSE_POS = pygame.mouse.get_pos()
+
+        SCREEN.fill(HEX_GREY)
+
+        X_SPACING = WIDTH * 0.25
+        Y_SPACING = HEIGHT * 0.1
+
+        # Angle
+        text = get_font(HEIGHT * 0.1).render("Angle", True, HEX_BLUE)
+        rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING))
+        SCREEN.blit(text, rect)
+
+        # amt1
+        text = get_font(HEIGHT * 0.04).render(amt1, True, HEX_WHITE)
+        rect = text.get_rect(center=(WIDTH // 2 - X_SPACING, Y_SPACING * 3))
+        SCREEN.blit(text, rect)
+
+        # =
+        text = get_font(HEIGHT * 0.04).render("=", True, HEX_WHITE)
+        rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING * 4))
+        SCREEN.blit(text, rect)
+
+        # amt2
+        text = get_font(HEIGHT * 0.04).render(amt2, True, HEX_WHITE)
+        rect = text.get_rect(center=(WIDTH // 2 - X_SPACING, Y_SPACING * 5))
+        SCREEN.blit(text, rect)
+
+        UNIT1_BUTTON = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * 3),
+            text_input=unit1,
+            font=get_font(HEIGHT * 0.04),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        UNIT2_BUTTON = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * 5),
+            text_input=unit2,
+            font=get_font(HEIGHT * 0.04),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        BACK_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.4, HEIGHT - Y_SPACING),
+            text_input="Back",
+            font=get_font(HEIGHT * 0.05),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        EXIT_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.6, HEIGHT - Y_SPACING),
+            text_input="Exit",
+            font=get_font(HEIGHT * 0.05),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        for button in [
+            UNIT1_BUTTON,
+            UNIT2_BUTTON,
+            BACK_BUTTON,
+            EXIT_BUTTON,
+        ]:
+            button.changeColor(MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_0:
+                    amt1 += "0"
+                elif event.key == pygame.K_1:
+                    amt1 += "1"
+                elif event.key == pygame.K_2:
+                    amt1 += "2"
+                elif event.key == pygame.K_3:
+                    amt1 += "3"
+                elif event.key == pygame.K_4:
+                    amt1 += "4"
+                elif event.key == pygame.K_5:
+                    amt1 += "5"
+                elif event.key == pygame.K_6:
+                    amt1 += "6"
+                elif event.key == pygame.K_7:
+                    amt1 += "7"
+                elif event.key == pygame.K_8:
+                    amt1 += "8"
+                elif event.key == pygame.K_9:
+                    amt1 += "9"
+                elif event.key == pygame.K_PERIOD or event.key == pygame.K_COMMA:
+                    amt1 += "."
+                elif event.key == pygame.K_ESCAPE:
+                    amt1 = ""
+                elif event.key == pygame.K_BACKSPACE:
+                    amt1 = amt1[:-1]
+
+                c = AngleConversion(amt1, unit1, unit2)
+                try:
+                    amt2 = str(round(c.convert(), 2))
+                except TypeError:
+                    amt2 = str(c.convert())
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if UNIT1_BUTTON.checkForInput(MOUSE_POS):
+                    unit1 = conversions_angle_menu_unit_selection(unit1, 0)
+                if UNIT2_BUTTON.checkForInput(MOUSE_POS):
+                    unit2 = conversions_angle_menu_unit_selection(unit2, 2)
+                if BACK_BUTTON.checkForInput(MOUSE_POS):
+                    conversions_menu()
+                if EXIT_BUTTON.checkForInput(MOUSE_POS):
+                    pygame.quit()
+                    sys.exit()
+
+                c = AngleConversion(amt1, unit1, unit2)
+                try:
+                    amt2 = str(round(c.convert(), 2))
+                except TypeError:
+                    amt2 = str(c.convert())
+
+        pygame.display.update()
+
+
+def conversions_angle_menu_unit_selection(curr_unit, flag):
+    while True:
+        MOUSE_POS = pygame.mouse.get_pos()
+
+        SCREEN.fill(HEX_GREY)
+
+        X_SPACING = WIDTH * 0.25
+        Y_SPACING = HEIGHT * 0.1
+        y_increment = 3.5
+
+        DEGREE = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="degree(º)",
+            font=get_font(HEIGHT * 0.025),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.4
+
+        RADIAN = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="radian(π)",
+            font=get_font(HEIGHT * 0.025),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.4
+
+        MINUTE = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="minute(')",
+            font=get_font(HEIGHT * 0.025),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.4
+
+        SECOND = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="second('')",
+            font=get_font(HEIGHT * 0.025),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.4
+
+        CIRCLE = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="circle",
+            font=get_font(HEIGHT * 0.025),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.4
+
+        QUADRANT = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="quadrant",
+            font=get_font(HEIGHT * 0.025),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.4
+
+        for button in [DEGREE, RADIAN, MINUTE, SECOND, CIRCLE, QUADRANT]:
+            button.changeColor(MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return curr_unit
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if DEGREE.checkForInput(MOUSE_POS):
+                    return "degree(º)"
+                if RADIAN.checkForInput(MOUSE_POS):
+                    return "radian(π)"
+                if MINUTE.checkForInput(MOUSE_POS):
+                    return "minute(')"
+                if SECOND.checkForInput(MOUSE_POS):
+                    return "second('')"
+                if CIRCLE.checkForInput(MOUSE_POS):
+                    return "circle"
+                if QUADRANT.checkForInput(MOUSE_POS):
+                    return "quadrant"
 
         pygame.display.update()
 
