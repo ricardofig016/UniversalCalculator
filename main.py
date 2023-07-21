@@ -150,7 +150,7 @@ def conversions_menu():
 
         ANGLE_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
+            pos=(WIDTH * 0.25, Y_SPACING * button_counter),
             text_input="Angle",
             font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
@@ -160,7 +160,7 @@ def conversions_menu():
 
         AREA_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
+            pos=(WIDTH * 0.25, Y_SPACING * button_counter),
             text_input="Area",
             font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
@@ -170,8 +170,28 @@ def conversions_menu():
 
         CURRENCY_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
+            pos=(WIDTH * 0.25, Y_SPACING * button_counter),
             text_input="Currency",
+            font=get_font(HEIGHT * button_size_multiplier),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        button_counter += 1
+
+        DATA_STORAGE_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.25, Y_SPACING * button_counter),
+            text_input="Data Storage",
+            font=get_font(HEIGHT * button_size_multiplier),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        button_counter += 1
+
+        ENERGY_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.25, Y_SPACING * button_counter),
+            text_input="Energy",
             font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
@@ -180,8 +200,50 @@ def conversions_menu():
 
         LENGTH_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
+            pos=(WIDTH * 0.25, Y_SPACING * button_counter),
             text_input="Length",
+            font=get_font(HEIGHT * button_size_multiplier),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        button_counter += 1
+
+        NUMBERS_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.25, Y_SPACING * button_counter),
+            text_input="Numbers",
+            font=get_font(HEIGHT * button_size_multiplier),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        button_counter += 1
+
+        button_counter = 3
+
+        PREFIXES_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.75, Y_SPACING * button_counter),
+            text_input="Prefixes",
+            font=get_font(HEIGHT * button_size_multiplier),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        button_counter += 1
+
+        PRESSURE_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.75, Y_SPACING * button_counter),
+            text_input="Pressure",
+            font=get_font(HEIGHT * button_size_multiplier),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        button_counter += 1
+
+        SPEED_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.75, Y_SPACING * button_counter),
+            text_input="Speed",
             font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
@@ -190,8 +252,18 @@ def conversions_menu():
 
         TEMPERATURE_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
+            pos=(WIDTH * 0.75, Y_SPACING * button_counter),
             text_input="Temperature",
+            font=get_font(HEIGHT * button_size_multiplier),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        button_counter += 1
+
+        TIME_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.75, Y_SPACING * button_counter),
+            text_input="Time",
             font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
@@ -200,7 +272,7 @@ def conversions_menu():
 
         VOLUME_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
+            pos=(WIDTH * 0.75, Y_SPACING * button_counter),
             text_input="Volume",
             font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
@@ -210,7 +282,7 @@ def conversions_menu():
 
         WEIGHT_BUTTON = Button(
             image=None,
-            pos=(WIDTH * 0.5, Y_SPACING * button_counter),
+            pos=(WIDTH * 0.75, Y_SPACING * button_counter),
             text_input="Weight",
             font=get_font(HEIGHT * button_size_multiplier),
             base_color=HEX_WHITE,
@@ -240,8 +312,15 @@ def conversions_menu():
             ANGLE_BUTTON,
             AREA_BUTTON,
             CURRENCY_BUTTON,
+            DATA_STORAGE_BUTTON,
+            ENERGY_BUTTON,
             LENGTH_BUTTON,
+            NUMBERS_BUTTON,
+            PREFIXES_BUTTON,
+            PRESSURE_BUTTON,
+            SPEED_BUTTON,
             TEMPERATURE_BUTTON,
+            TIME_BUTTON,
             VOLUME_BUTTON,
             WEIGHT_BUTTON,
             BACK_BUTTON,
@@ -265,10 +344,6 @@ def conversions_menu():
                     conversions_length_menu()
                 if TEMPERATURE_BUTTON.checkForInput(MOUSE_POS):
                     conversions_temperature_menu()
-                if VOLUME_BUTTON.checkForInput(MOUSE_POS):
-                    conversions_volume_menu()
-                if WEIGHT_BUTTON.checkForInput(MOUSE_POS):
-                    conversions_weight_menu()
                 if BACK_BUTTON.checkForInput(MOUSE_POS):
                     main_menu()
                 if EXIT_BUTTON.checkForInput(MOUSE_POS):
