@@ -31,7 +31,7 @@ class CurrencyConversion(object):
             return self.convert_cny()
 
         if self.unit1 == "GBP(British Pound Strerling)":
-            return self.convert_gpb()
+            return self.convert_gbp()
 
         if self.unit1 == "INR(Indian Rupee)":
             return self.convert_inr()
