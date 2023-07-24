@@ -28,7 +28,7 @@ class AngleConversion(object):
             return self.convert_circle()
 
         if self.unit1 == "quadrant":
-            return self.convert_qadrant()
+            return self.convert_quadrant()
 
         return "invalid_unit1"
 
@@ -107,7 +107,7 @@ class AngleConversion(object):
             return self.amt1 * 4
         return "invalid_unit2"
 
-    def convert_qadrant(self):
+    def convert_quadrant(self):
         if self.unit2 == "degree(º)":
             return self.amt1 * 90
         if self.unit2 == "radian(π)":
