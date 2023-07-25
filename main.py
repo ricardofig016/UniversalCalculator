@@ -341,6 +341,8 @@ def conversions_menu():
                     conversions_area_menu()
                 if CURRENCY_BUTTON.checkForInput(MOUSE_POS):
                     conversions_currency_menu()
+                if DATA_STORAGE_BUTTON.checkForInput(MOUSE_POS):
+                    conversions_data_menu()
                 if LENGTH_BUTTON.checkForInput(MOUSE_POS):
                     conversions_length_menu()
                 if TEMPERATURE_BUTTON.checkForInput(MOUSE_POS):
@@ -1185,11 +1187,14 @@ def conversions_currency_menu_unit_selection(curr_unit, flag):
 
 
 def conversions_data_menu():
-    unit1 = "byte(B)"
+    unit1 = "Byte(B)"
     unit2 = "bit(b)"
     amt1 = "1"
     c = DataConversion(amt1, unit1, unit2)
-    amt2 = str(c.convert())
+    try:
+        amt2 = str(round(c.convert(), 2))
+    except TypeError:
+        amt2 = str(c.convert())
 
     while True:
         MOUSE_POS = pygame.mouse.get_pos()
@@ -1297,7 +1302,10 @@ def conversions_data_menu():
                     amt1 = amt1[:-1]
 
                 c = DataConversion(amt1, unit1, unit2)
-                amt2 = str(c.convert())
+                try:
+                    amt2 = str(round(c.convert(), 2))
+                except TypeError:
+                    amt2 = str(c.convert())
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if UNIT1_BUTTON.checkForInput(MOUSE_POS):
@@ -1311,7 +1319,10 @@ def conversions_data_menu():
                     sys.exit()
 
                 c = DataConversion(amt1, unit1, unit2)
-                amt2 = str(c.convert())
+                try:
+                    amt2 = str(round(c.convert(), 2))
+                except TypeError:
+                    amt2 = str(c.convert())
 
         pygame.display.update()
 
@@ -1326,67 +1337,107 @@ def conversions_data_menu_unit_selection(curr_unit, flag):
         Y_SPACING = HEIGHT * 0.1
         y_increment = 3.5
 
-        DEGREE = Button(
+        BIT = Button(
             image=None,
             pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
-            text_input="degree(º)",
-            font=get_font(HEIGHT * 0.025),
+            text_input="bit(b)",
+            font=get_font(HEIGHT * 0.03),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
-        y_increment += 0.4
+        y_increment += 0.5
 
-        RADIAN = Button(
+        BYTE = Button(
             image=None,
             pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
-            text_input="radian(π)",
-            font=get_font(HEIGHT * 0.025),
+            text_input="Byte(B)",
+            font=get_font(HEIGHT * 0.03),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
-        y_increment += 0.4
+        y_increment += 0.5
 
-        MINUTE = Button(
+        WORD = Button(
             image=None,
             pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
-            text_input="minute(')",
-            font=get_font(HEIGHT * 0.025),
+            text_input="word",
+            font=get_font(HEIGHT * 0.03),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
-        y_increment += 0.4
+        y_increment += 0.5
 
-        SECOND = Button(
+        BLOCK = Button(
             image=None,
             pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
-            text_input="second('')",
-            font=get_font(HEIGHT * 0.025),
+            text_input="block",
+            font=get_font(HEIGHT * 0.03),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
-        y_increment += 0.4
+        y_increment += 0.5
 
-        CIRCLE = Button(
+        KILOBYTE = Button(
             image=None,
             pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
-            text_input="circle",
-            font=get_font(HEIGHT * 0.025),
+            text_input="kiloByte(kB)",
+            font=get_font(HEIGHT * 0.03),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
-        y_increment += 0.4
+        y_increment += 0.5
 
-        QUADRANT = Button(
+        MEGABYTE = Button(
             image=None,
             pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
-            text_input="quadrant",
-            font=get_font(HEIGHT * 0.025),
+            text_input="megaByte(MB)",
+            font=get_font(HEIGHT * 0.03),
             base_color=HEX_WHITE,
             hovering_color=HEX_BLUE,
         )
-        y_increment += 0.4
+        y_increment += 0.5
 
-        for button in [DEGREE, RADIAN, MINUTE, SECOND, CIRCLE, QUADRANT]:
+        GIGABYTE = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="gigaByte(GB)",
+            font=get_font(HEIGHT * 0.03),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        TERABYTE = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="teraByte(TB)",
+            font=get_font(HEIGHT * 0.03),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        PETABYTE = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="petaByte(PB)",
+            font=get_font(HEIGHT * 0.03),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        for button in [
+            BIT,
+            BYTE,
+            WORD,
+            BLOCK,
+            KILOBYTE,
+            MEGABYTE,
+            GIGABYTE,
+            TERABYTE,
+            PETABYTE,
+        ]:
             button.changeColor(MOUSE_POS)
             button.update(SCREEN)
 
@@ -1399,18 +1450,24 @@ def conversions_data_menu_unit_selection(curr_unit, flag):
                     return curr_unit
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if DEGREE.checkForInput(MOUSE_POS):
-                    return "degree(º)"
-                if RADIAN.checkForInput(MOUSE_POS):
-                    return "radian(π)"
-                if MINUTE.checkForInput(MOUSE_POS):
-                    return "minute(')"
-                if SECOND.checkForInput(MOUSE_POS):
-                    return "second('')"
-                if CIRCLE.checkForInput(MOUSE_POS):
-                    return "circle"
-                if QUADRANT.checkForInput(MOUSE_POS):
-                    return "quadrant"
+                if BIT.checkForInput(MOUSE_POS):
+                    return "bit(b)"
+                if BYTE.checkForInput(MOUSE_POS):
+                    return "Byte(B)"
+                if WORD.checkForInput(MOUSE_POS):
+                    return "word"
+                if BLOCK.checkForInput(MOUSE_POS):
+                    return "block"
+                if KILOBYTE.checkForInput(MOUSE_POS):
+                    return "kiloByte(kB)"
+                if MEGABYTE.checkForInput(MOUSE_POS):
+                    return "megaByte(MB)"
+                if GIGABYTE.checkForInput(MOUSE_POS):
+                    return "gigaByte(GB)"
+                if TERABYTE.checkForInput(MOUSE_POS):
+                    return "teraByte(TB)"
+                if PETABYTE.checkForInput(MOUSE_POS):
+                    return "petaByte(PB)"
 
         pygame.display.update()
 
