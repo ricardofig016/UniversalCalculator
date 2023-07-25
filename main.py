@@ -1598,9 +1598,9 @@ def conversions_energy_menu():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if UNIT1_BUTTON.checkForInput(MOUSE_POS):
-                    unit1 = conversions_data_menu_unit_selection(unit1, 0)
+                    unit1 = conversions_energy_menu_unit_selection(unit1, 0)
                 if UNIT2_BUTTON.checkForInput(MOUSE_POS):
-                    unit2 = conversions_data_menu_unit_selection(unit2, 2)
+                    unit2 = conversions_energy_menu_unit_selection(unit2, 2)
                 if BACK_BUTTON.checkForInput(MOUSE_POS):
                     conversions_menu()
                 if EXIT_BUTTON.checkForInput(MOUSE_POS):
@@ -1612,6 +1612,104 @@ def conversions_energy_menu():
                     amt2 = str(round(c.convert(), 2))
                 except TypeError:
                     amt2 = str(c.convert())
+
+        pygame.display.update()
+
+
+def conversions_energy_menu_unit_selection(curr_unit, flag):
+    while True:
+        MOUSE_POS = pygame.mouse.get_pos()
+
+        SCREEN.fill(HEX_GREY)
+
+        X_SPACING = WIDTH * 0.25
+        Y_SPACING = HEIGHT * 0.1
+        y_increment = 3.5
+
+        JOULE = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="joule(J)",
+            font=get_font(HEIGHT * 0.035),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        KILOJOULE = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="kilojoule(kJ)",
+            font=get_font(HEIGHT * 0.035),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        WATTHOUR = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="watt-hour(Wh)",
+            font=get_font(HEIGHT * 0.035),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        KILOWATTHOUR = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="kilowatt-hour(kWh)",
+            font=get_font(HEIGHT * 0.035),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        KILOCALORIE = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="kilocalorie(kcal)",
+            font=get_font(HEIGHT * 0.035),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+        BTU = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="Btu",
+            font=get_font(HEIGHT * 0.035),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        for button in [JOULE, KILOJOULE, WATTHOUR, KILOWATTHOUR, KILOCALORIE, BTU]:
+            button.changeColor(MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return curr_unit
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if JOULE.checkForInput(MOUSE_POS):
+                    return "joule(J)"
+                if KILOJOULE.checkForInput(MOUSE_POS):
+                    return "kilojoule(kJ)"
+                if WATTHOUR.checkForInput(MOUSE_POS):
+                    return "watt-hour(Wh)"
+                if KILOWATTHOUR.checkForInput(MOUSE_POS):
+                    return "kilowatt-hour(kWh)"
+                if KILOCALORIE.checkForInput(MOUSE_POS):
+                    return "kilocalorie(kcal)"
+                if BTU.checkForInput(MOUSE_POS):
+                    return "Btu"
 
         pygame.display.update()
 
