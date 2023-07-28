@@ -8,6 +8,7 @@ from converters.currency_conversion import CurrencyConversion
 from converters.data_conversion import DataConversion
 from converters.energy_conversion import EnergyConversion
 from converters.length_conversion import LengthConversion
+from converters.numbers_conversion import NumbersConversion
 from converters.temperature_conversion import TemperatureConversion
 
 pygame.init()
@@ -122,13 +123,17 @@ def main_menu():
                 if CONVERSIONS_BUTTON.checkForInput(MOUSE_POS):
                     conversions_menu()
                 if FITNESS_BUTTON.checkForInput(MOUSE_POS):
-                    fitness_menu()
+                    # fitness_menu()
+                    pass
                 if MATH_BUTTON.checkForInput(MOUSE_POS):
-                    math_menu()
+                    # math_menu()
+                    pass
                 if GENERATORS_BUTTON.checkForInput(MOUSE_POS):
-                    generators_menu()
+                    # generators_menu()
+                    pass
                 if TIME_BUTTON.checkForInput(MOUSE_POS):
-                    time_menu()
+                    # time_menu()
+                    pass
                 if EXIT_BUTTON.checkForInput(MOUSE_POS):
                     pygame.quit()
                     sys.exit()
@@ -348,6 +353,8 @@ def conversions_menu():
                     conversions_energy_menu()
                 if LENGTH_BUTTON.checkForInput(MOUSE_POS):
                     conversions_length_menu()
+                if NUMBERS_BUTTON.checkForInput(MOUSE_POS):
+                    conversions_numbers_menu()
                 if TEMPERATURE_BUTTON.checkForInput(MOUSE_POS):
                     conversions_temperature_menu()
                 if BACK_BUTTON.checkForInput(MOUSE_POS):
@@ -2034,6 +2041,274 @@ def conversions_length_menu_unit_selection(curr_unit, flag):
                     return "inch(in)"
                 if LIGH_YEAR.checkForInput(MOUSE_POS):
                     return "light year(ly)"
+
+        pygame.display.update()
+
+
+def conversions_numbers_menu():
+    unit1 = "decimal"
+    unit2 = "roman"
+    amt1 = "56"
+    c = NumbersConversion(amt1, unit1, unit2)
+    amt2 = str(c.convert())
+
+    while True:
+        MOUSE_POS = pygame.mouse.get_pos()
+
+        SCREEN.fill(HEX_GREY)
+
+        X_SPACING = WIDTH * 0.25
+        Y_SPACING = HEIGHT * 0.1
+
+        # Numbers
+        text = get_font(HEIGHT * 0.1).render("Numbers", True, HEX_BLUE)
+        rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING))
+        SCREEN.blit(text, rect)
+
+        # amt1
+        text = get_font(HEIGHT * 0.04).render(amt1, True, HEX_WHITE)
+        rect = text.get_rect(center=(WIDTH // 2 - X_SPACING, Y_SPACING * 3))
+        SCREEN.blit(text, rect)
+
+        # =
+        text = get_font(HEIGHT * 0.04).render("=", True, HEX_WHITE)
+        rect = text.get_rect(center=(WIDTH * 0.5, Y_SPACING * 4))
+        SCREEN.blit(text, rect)
+
+        # amt2
+        text = get_font(HEIGHT * 0.04).render(amt2, True, HEX_WHITE)
+        rect = text.get_rect(center=(WIDTH // 2 - X_SPACING, Y_SPACING * 5))
+        SCREEN.blit(text, rect)
+
+        UNIT1_BUTTON = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * 3),
+            text_input=unit1,
+            font=get_font(HEIGHT * 0.04),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        UNIT2_BUTTON = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * 5),
+            text_input=unit2,
+            font=get_font(HEIGHT * 0.04),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        BACK_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.4, HEIGHT - Y_SPACING),
+            text_input="Back",
+            font=get_font(HEIGHT * 0.05),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        EXIT_BUTTON = Button(
+            image=None,
+            pos=(WIDTH * 0.6, HEIGHT - Y_SPACING),
+            text_input="Exit",
+            font=get_font(HEIGHT * 0.05),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+
+        for button in [
+            UNIT1_BUTTON,
+            UNIT2_BUTTON,
+            BACK_BUTTON,
+            EXIT_BUTTON,
+        ]:
+            button.changeColor(MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if unit1 == "roman":
+                    if event.key == pygame.K_i:
+                        amt1 += "I"
+
+                    if event.key == pygame.K_v:
+                        amt1 += "V"
+
+                    if event.key == pygame.K_x:
+                        amt1 += "X"
+
+                    if event.key == pygame.K_l:
+                        amt1 += "L"
+
+                    if event.key == pygame.K_c:
+                        amt1 += "C"
+
+                    if event.key == pygame.K_d:
+                        amt1 += "D"
+
+                    if event.key == pygame.K_m:
+                        amt1 += "M"
+
+                elif unit1 == "hex":
+                    if event.key == pygame.K_0:
+                        amt1 += "0"
+                    if event.key == pygame.K_1:
+                        amt1 += "1"
+                    if event.key == pygame.K_2:
+                        amt1 += "2"
+                    if event.key == pygame.K_3:
+                        amt1 += "3"
+                    if event.key == pygame.K_4:
+                        amt1 += "4"
+                    if event.key == pygame.K_5:
+                        amt1 += "5"
+                    if event.key == pygame.K_6:
+                        amt1 += "6"
+                    if event.key == pygame.K_7:
+                        amt1 += "7"
+                    if event.key == pygame.K_8:
+                        amt1 += "8"
+                    if event.key == pygame.K_9:
+                        amt1 += "9"
+                    if event.key == pygame.K_a:
+                        amt1 += "A"
+                    if event.key == pygame.K_b:
+                        amt1 += "B"
+                    if event.key == pygame.K_c:
+                        amt1 += "C"
+                    if event.key == pygame.K_d:
+                        amt1 += "D"
+                    if event.key == pygame.K_e:
+                        amt1 += "E"
+                    if event.key == pygame.K_f:
+                        amt1 += "F"
+                elif unit1 == "decimal":
+                    if event.key == pygame.K_0:
+                        amt1 += "0"
+                    if event.key == pygame.K_1:
+                        amt1 += "1"
+                    if event.key == pygame.K_2:
+                        amt1 += "2"
+                    if event.key == pygame.K_3:
+                        amt1 += "3"
+                    if event.key == pygame.K_4:
+                        amt1 += "4"
+                    if event.key == pygame.K_5:
+                        amt1 += "5"
+                    if event.key == pygame.K_6:
+                        amt1 += "6"
+                    if event.key == pygame.K_7:
+                        amt1 += "7"
+                    if event.key == pygame.K_8:
+                        amt1 += "8"
+                    if event.key == pygame.K_9:
+                        amt1 += "9"
+                elif unit1 == "binary":
+                    if event.key == pygame.K_0:
+                        amt1 += "0"
+                    if event.key == pygame.K_1:
+                        amt1 += "1"
+
+                if event.key == pygame.K_ESCAPE:
+                    amt1 = ""
+                if event.key == pygame.K_BACKSPACE:
+                    amt1 = amt1[:-1]
+
+                c = NumbersConversion(amt1, unit1, unit2)
+                amt2 = str(c.convert())
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if UNIT1_BUTTON.checkForInput(MOUSE_POS):
+                    unit1 = conversions_numbers_menu_unit_selection(unit1, 0)
+                    amt1 = ""
+                if UNIT2_BUTTON.checkForInput(MOUSE_POS):
+                    unit2 = conversions_numbers_menu_unit_selection(unit2, 2)
+                if BACK_BUTTON.checkForInput(MOUSE_POS):
+                    conversions_menu()
+                if EXIT_BUTTON.checkForInput(MOUSE_POS):
+                    pygame.quit()
+                    sys.exit()
+
+                c = NumbersConversion(amt1, unit1, unit2)
+                amt2 = str(c.convert())
+
+        pygame.display.update()
+
+
+def conversions_numbers_menu_unit_selection(curr_unit, flag):
+    while True:
+        MOUSE_POS = pygame.mouse.get_pos()
+
+        SCREEN.fill(HEX_GREY)
+
+        X_SPACING = WIDTH * 0.25
+        Y_SPACING = HEIGHT * 0.1
+        y_increment = 3.5
+
+        DECIMAL = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="decimal",
+            font=get_font(HEIGHT * 0.035),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        BINARY = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="binary",
+            font=get_font(HEIGHT * 0.035),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        HEX = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="hex",
+            font=get_font(HEIGHT * 0.035),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        ROMAN = Button(
+            image=None,
+            pos=(WIDTH - X_SPACING, Y_SPACING * (y_increment + flag)),
+            text_input="roman",
+            font=get_font(HEIGHT * 0.035),
+            base_color=HEX_WHITE,
+            hovering_color=HEX_BLUE,
+        )
+        y_increment += 0.5
+
+        for button in [DECIMAL, BINARY, HEX, ROMAN]:
+            button.changeColor(MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return curr_unit
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if DECIMAL.checkForInput(MOUSE_POS):
+                    return "decimal"
+                if BINARY.checkForInput(MOUSE_POS):
+                    return "binary"
+                if HEX.checkForInput(MOUSE_POS):
+                    return "hex"
+                if ROMAN.checkForInput(MOUSE_POS):
+                    return "roman"
 
         pygame.display.update()
 
